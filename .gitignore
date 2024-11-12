@@ -1,0 +1,94 @@
+# Ignore macOS system files
+.DS_Store
+
+# Ignore Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Ignore IDE files
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# PyCharm
+.idea/
+*.idea/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore Python virtual environments
+venv/
+.env/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore Logs and Databases
+*.log
+*.sqlite3
+*.db
+*.sql
+
+# Ignore node_modules for Node.js projects
+node_modules/
+
+# Ignore build directories
+build/
+dist/
+target/
+
+# Ignore compiled files
+*.o
+*.obj
+*.so
+*.exe
+*.dll
+*.class
+
+# Ignore coverage reports
+coverage/
+*.cover
+*.coverage
+*.cov
+*.lcov
+
+# Ignore environment and package manager files
+.env
+.env.*
+*.envrc
+.pipenv
+Pipfile.lock
+poetry.lock
+package-lock.json
+yarn.lock
+
+# Ignore Docker and Vagrant files
+.docker/
+.dockerignore
+.vagrant/
+
+# Ignore Terraform files
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.*
+*.plan
