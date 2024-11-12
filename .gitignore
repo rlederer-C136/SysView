@@ -72,7 +72,6 @@ coverage/
 *.lcov
 
 # Ignore environment and package manager files
-.env
 .env.*
 *.envrc
 .pipenv
