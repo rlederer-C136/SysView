@@ -1,0 +1,79 @@
+services:
+  # Glances - System Telemetry
+  glances:
+    container_name: Glances
+    hostname: glances
+    build:
+      context: ./Glances
+      dockerfile: Dockerfile
+    depends_on:
+      - influxdb
+    restart: always
+    environment:
+      - "GLANCES_OPT=--export influxdb2 --quiet"
+    volumes:
+      - ${DOCKER_SOCKET_PATH}:/var/run/docker.sock:ro  # Use environment variable for Docker socket path
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+    ports:
+      - "61208:61208"  # Expose port for macOS/Windows
+    pid: host
+    network_mode: "host"  # Only used for Linux
+    profiles:
+      - linux  # Only use host networking on Linux
+      - default  # Default for all platforms
+
+  # InfluxDB - Database for sensor data
+  influxdb:
+    image: influxdb:latest
+    env_file:
+      - .env
+    container_name: InfluxDB
+    hostname: influxdb
+    security_opt:
+      - no-new-privileges:true
+    restart: always
+    volumes:
+      - if-config:/etc/influxdb2  # Let Docker Compose handle the volume creation
+      - if-db:/var/lib/influxdb2:rw  # Let Docker Compose handle the volume creation
+    ports:
+      - "8086:8086"  # Open InfluxDB port for macOS/Windows
+    network_mode: "host"  # Only used for Linux
+    profiles:
+      - linux  # Only use host networking on Linux
+      - default  # Default for all platforms
+
+  # Grafana - Visualization System
+  grafana:
+    container_name: Grafana
+    hostname: grafana
+    build:
+      context: ./Grafana
+      dockerfile: Dockerfile
+    depends_on:
+      - influxdb
+    restart: always
+    volumes:
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3000:3000"  # Open Grafana port for macOS/Windows
+    network_mode: "host"  # Only used for Linux
+    profiles:
+      - linux  # Only use host networking on Linux
+      - default  # Default for all platforms
+
+# Volumes for persistent data (these are managed internally by Docker Compose)
+volumes:
+  if-db:
+  if-config:
+  grafana_data: {}
+
+# Network (Linux will use host networking, macOS/Windows will use default bridge)
+networks:
+  node-network:
+    driver: bridge
