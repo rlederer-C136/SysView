@@ -17,3 +17,4 @@ $ docker compose up -d
 This approach allows a single Docker Compose file that works across Linux, macOS, and Windows, adapting to 
 the platform's specific needs via profiles and network configuration.
 
+![Glances on Grafana](https://github.com/rlederer-C136/SysView/blob/main/SysView.png?raw=true)
