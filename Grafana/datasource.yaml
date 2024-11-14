@@ -8,7 +8,7 @@ datasources:
     timeInterval: 1
     jsonData:
       version: Flux
-      organization: VeriCog
+      organization: SysView
       defaultBucket: glances
     secureJsonData:
       token: EjFUTWe8U-MIseEAkaVIgVnej_TrnbdvEcRkaB1imstW7gapSqy6_6-8XD-yd51V0zUUpDy-kAdVD1purDLuxA==
